@@ -522,7 +522,8 @@ class ProductItemController extends Controller
             // $data->campaign_start   = date('Y-m-d', strtotime($campaign_start)) . ' 00:00:00';
             // $data->campaign_end     = date('Y-m-d', strtotime($campaign_end)) . ' 23:59:59';
             $data->need_insurance  = (int) $request->need_insurance;
-            $data->approval_status  = (int) $request->approval_status;
+            // $data->approval_status  = (int) $request->approval_status;
+            $data->approval_status  = 1;
             $data->published_status = 0;
             $new_product_published  = (int) $request->published_status;
             $data->save();
@@ -959,59 +960,60 @@ class ProductItemController extends Controller
             // }
 
             // MAKE SURE SLUG IS UNIQUE (FOR UPDATE DATA)
-            // $slug = Helper::generate_slug($name);
-            // if ($request->slug) {
-            //     $slug = Helper::generate_slug($request->slug);
-            // }
+            $slug = Helper::generate_slug($name);
+            if ($request->slug) {
+                $slug = Helper::generate_slug($request->slug);
+            }
 
             // MAKE SURE SLUG IS UNIQUE
-            // if ($data->slug != $slug) {
-            //     $slug = Helper::check_unique('product_item', $slug);
-            // }
+            if ($data->slug != $slug) {
+                $slug = Helper::check_unique('product_item', $slug);
+            }
 
             // SAVE THE DATA
             $data->category_id      = $category_id;
             $data->seller_id        = $seller_id;
             $data->name             = $name;
-            // $data->slug             = $slug;
+            $data->slug             = $slug;
             $data->summary          = $summary;
             // $data->qty              = $qty;
             // $data->price            = $price;
-            $data->campaign_start   = date('Y-m-d', strtotime($campaign_start)) . ' 00:00:00';
-            $data->campaign_end     = date('Y-m-d', strtotime($campaign_end)) . ' 23:59:59';
+            // $data->campaign_start   = date('Y-m-d', strtotime($campaign_start)) . ' 00:00:00';
+            // $data->campaign_end     = date('Y-m-d', strtotime($campaign_end)) . ' 23:59:59';
             $data->need_insurance  = (int) $request->need_insurance;
-            $data->approval_status  = (int) $request->approval_status;
+            // $data->approval_status  = (int) $request->approval_status;
+            $data->approval_status  = 1;
             $data->published_status = (int) $request->published_status;
             $data->save();
 
             // jika produk sedang request review dan di-approved, maka send email info ke seller
-            if ($product_data->published_status == 1 && $product_data->approval_status == 0 && $data->approval_status == 1 && $data->published_status == 1) {
-                $default_variant        = product_item_variant::where('product_item_id', $data->id)->where('is_default', 1)->first();
+            // if ($product_data->published_status == 1 && $product_data->approval_status == 0 && $data->approval_status == 1 && $data->published_status == 1) {
+            //     $default_variant        = product_item_variant::where('product_item_id', $data->id)->where('is_default', 1)->first();
 
-                $email                  = $seller_data->email;
-                $email_template         = 'emails.approval_product';
-                $this_subject           = 'Selamat, Produk Kamu Sudah Bisa Live di LokalKorner!';
-                $campaign_mulai         = date('d M Y', strtotime($campaign_start));
-                $campaign_berakhir      = date('d M Y', strtotime($campaign_end));
+            //     $email                  = $seller_data->email;
+            //     $email_template         = 'emails.approval_product';
+            //     $this_subject           = 'Selamat, Produk Kamu Sudah Bisa Live di LokalKorner!';
+            //     $campaign_mulai         = date('d M Y', strtotime($campaign_start));
+            //     $campaign_berakhir      = date('d M Y', strtotime($campaign_end));
 
-                $content                    = [];
-                $content['title']           = 'Selamat, Produk Kamu Sudah Bisa Live di LokalKorner!';
-                $content['name_store']     = $seller_data->store_name;
-                $content['produk']          = $name;
-                $content['price']           = $default_variant->price;
-                $content['campaign_start']  = $campaign_mulai;
-                $content['campaign_end']    = $campaign_berakhir;
+            //     $content                    = [];
+            //     $content['title']           = 'Selamat, Produk Kamu Sudah Bisa Live di LokalKorner!';
+            //     $content['name_store']     = $seller_data->store_name;
+            //     $content['produk']          = $name;
+            //     $content['price']           = $default_variant->price;
+            //     $content['campaign_start']  = $campaign_mulai;
+            //     $content['campaign_end']    = $campaign_berakhir;
 
-                // SEND EMAIL TO SELLER
-                Mail::send($email_template, ['data' => $content], function ($message) use ($email, $this_subject) {
-                    if (env('APP_MODE', 'STAGING') == 'STAGING') {
-                        $this_subject = '[STAGING] ' . $this_subject;
-                    }
+            //     // SEND EMAIL TO SELLER
+            //     Mail::send($email_template, ['data' => $content], function ($message) use ($email, $this_subject) {
+            //         if (env('APP_MODE', 'STAGING') == 'STAGING') {
+            //             $this_subject = '[STAGING] ' . $this_subject;
+            //         }
 
-                    $message->subject($this_subject);
-                    $message->to($email);
-                });
-            }
+            //         $message->subject($this_subject);
+            //         $message->to($email);
+            //     });
+            // }
 
             // logging
             $value_after = $data->toJson();

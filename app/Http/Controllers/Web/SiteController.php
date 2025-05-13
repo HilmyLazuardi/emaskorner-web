@@ -40,7 +40,7 @@ class SiteController extends Controller
                 'product_item.qty',
                 'product_item.qty_booked',
                 'product_item.qty_sold',
-                'product_item.campaign_end',
+                // 'product_item.campaign_end',
                 'seller.store_name as seller_name',
                 'default_variant.price',
                 'default_variant.slug',
@@ -70,7 +70,7 @@ class SiteController extends Controller
             })
             ->where('product_item.published_status', 1)
             ->where('product_item.approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
             ->orderBy('product_featured.ordinal')
             ->groupBy(
                 'product_featured.ordinal',
@@ -82,7 +82,7 @@ class SiteController extends Controller
                 'product_item.qty',
                 'product_item.qty_booked',
                 'product_item.qty_sold',
-                'product_item.campaign_end',
+                // 'product_item.campaign_end',
                 'seller.store_name',
                 'default_variant.slug',
                 'default_variant.price'
@@ -101,7 +101,7 @@ class SiteController extends Controller
             'product_item.qty',
             'product_item.qty_booked',
             'product_item.qty_sold',
-            'product_item.campaign_end',
+            // 'product_item.campaign_end',
             'seller.store_name as seller_name',
             'default_variant.slug',
             'default_variant.price',
@@ -129,8 +129,8 @@ class SiteController extends Controller
         })
         ->where('product_item.published_status', 1)
         ->where('product_item.approval_status', 1)
-        ->where('product_item.campaign_start', '<=', $now)
-        ->where('product_item.campaign_end', '>=', $two_month_ago)
+        // ->where('product_item.campaign_start', '<=', $now)
+        // ->where('product_item.campaign_end', '>=', $two_month_ago)
         ->orderBy('percentage', 'desc')
         ->groupBy(
             'product_item.id',
@@ -141,7 +141,7 @@ class SiteController extends Controller
             'product_item.qty',
             'product_item.qty_booked',
             'product_item.qty_sold',
-            'product_item.campaign_end',
+            // 'product_item.campaign_end',
             'seller.store_name',
             'default_variant.slug',
             'default_variant.price'
@@ -177,7 +177,7 @@ class SiteController extends Controller
             'product_item.qty',
             'product_item.qty_booked',
             'product_item.qty_sold',
-            'product_item.campaign_end',
+            // 'product_item.campaign_end',
             'seller.store_name as seller_name',
             'default_variant.slug',
             'default_variant.price',
@@ -205,7 +205,7 @@ class SiteController extends Controller
             })
             ->where('product_item.published_status', 1)
             ->where('product_item.approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
             ->orderBy('product_item.created_at', 'desc')
             ->groupBy(
                 'product_item.id',
@@ -216,7 +216,7 @@ class SiteController extends Controller
                 'product_item.qty',
                 'product_item.qty_booked',
                 'product_item.qty_sold',
-                'product_item.campaign_end',
+                // 'product_item.campaign_end',
                 'seller.store_name',
                 'default_variant.slug',
                 'default_variant.price'
@@ -226,7 +226,7 @@ class SiteController extends Controller
 
         $count_new = product_item::where('published_status', 1)
             ->where('approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
             ->count();
         
         if ($count_new > 24) {

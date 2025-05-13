@@ -199,7 +199,7 @@
             <div class="container prod_desc">
                 <h2>{{ $data_category->name }}</h2>
                 <p>{{ $data_category->description }}</p>
-                <span>( {{ $count_product }} ) Project</span>
+                <span>( {{ $count_product }} ) Product</span>
             </div>
             <div class="row_clear container">
                 <div id="list-product" class="list-product-new">

@@ -473,8 +473,8 @@ header {
       header .header_right .h_cart:hover .cart_box {
         display: block; }
       header .header_right .h_cart .cart_box {
-        width: 380px;
-        height: 235px;
+        width: 400px;
+        height: 325px;
         display: none;
         background: #fff;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -482,7 +482,7 @@ header {
         top: 68px;
         right: -140px;
         padding: 20px;
-        overflow: hidden; }
+        overflow: auto; }
       header .header_right .h_cart .cart_title {
         padding-bottom: 15px;
         margin-bottom: 15px;
@@ -500,7 +500,7 @@ header {
           font-family: 'WorkSansBold';
           font-size: 16px; }
       header .header_right .h_cart .cart_wrapper {
-        height: 150px;
+        height: 230px;
         overflow-y: auto;
         overflow-x: hidden; }
       header .header_right .h_cart .cart_list {

@@ -50,6 +50,7 @@
             </h2>
         @endif
         <input type="hidden" name="product_id" value="{{ $data->id }}">
+        <input type="hidden" name="product_variant_sku_id" value="{{ $data->variant_sku_id }}">
         <input type="hidden" name="product_slug" value="{{ $slug }}">
         <div class="section_product_banner vtwo">
             <div class="row_flex container">
@@ -197,7 +198,7 @@
                                         @if ($data->total_qty < 1)
                                             <div class="flag_text">
                                                 <span>Terjual Habis</span>
-                                                Terima kasih sudah mendukung kami. Stay tuned untuk cool project selanjutnya, ya!
+                                                Terima kasih sudah mendukung kami. Stay tuned untuk cool product selanjutnya, ya!
                                                 <a href="{{ route('web.home') }}" class="def_btn">CEK PRODUK LAINNYA</a>
                                             </div>
                                         @else
@@ -206,12 +207,12 @@
                                             Silahkan cek variant yang lain ya!
                                         </div>
                                         @endif
-                                    @elseif ($data->flag_campaign_end)
+                                    {{-- @elseif ($data->flag_campaign_end)
                                         <div class="flag_text">
                                             <span>Campaign Berakhir</span>
-                                            Terima kasih sudah mendukung kami. Stay tuned untuk cool project selanjutnya, ya!
+                                            Terima kasih sudah mendukung kami. Stay tuned untuk cool product selanjutnya, ya!
                                             <a href="{{ route('web.home') }}" class="def_btn">CEK PRODUK LAINNYA</a>
-                                        </div>
+                                        </div> --}}
                                     @else
                                         <div class="form_box" id="input_qty">
                                             <span class="title">Jumlah</span>
@@ -404,6 +405,7 @@
 @section('footer-script')
     <script>
         var product_id = '';
+        var product_variant_sku_id = '';
         @if (count($errors) > 0)
             show_popup_failed();
         @endif
@@ -592,7 +594,7 @@
                             if (item.all_qty < 1) {
                                 html += "<div class='flag_text'>";
                                     html += "<span>Terjual Habis</span>";
-                                    html += "Terima kasih sudah mendukung kami.<br>Stay tuned untuk cool project selanjutnya, ya!";
+                                    html += "Terima kasih sudah mendukung kami.<br>Stay tuned untuk cool product selanjutnya, ya!";
                                 html += "</div>";
                                 $("#validation-row").html(html);
                                 // $(".select-variant").remove();
@@ -603,12 +605,12 @@
                                 html += "</div>";
                                 $("#validation-row").html(html);
                             }
-                        } else if (item.flag_campaign_end) {
-                            html += "<div class='flag_text' style='padding-top:10px;'>";
-                                html += "<span style='margin-bottom:5px;'>Campaign Berakhir</span>";
-                                html += "Terima kasih sudah mendukung kami.<br>Stay tuned untuk cool project selanjutnya, ya!";
-                            html += "</div>";
-                            $("#validation-row").html(html);
+                        // } else if (item.flag_campaign_end) {
+                        //     html += "<div class='flag_text' style='padding-top:10px;'>";
+                        //         html += "<span style='margin-bottom:5px;'>Campaign Berakhir</span>";
+                        //         html += "Terima kasih sudah mendukung kami.<br>Stay tuned untuk cool product selanjutnya, ya!";
+                        //     html += "</div>";
+                        //     $("#validation-row").html(html);
                         } else if (!item.status){
                             html += "<div class='flag_text'>";
                                     html += "<span>Variant Ini Tidak Tersedia</span>";
@@ -636,6 +638,7 @@
                         $("#quant").prop('max', item.qty_available);
                         // UPDATE WISHLIST BTN VALUE
                         product_id = item.object_id;
+                        product_variant_sku_id = item.variant_sku_id;
                         $('#add_to_wishlist').val(product_id);
                         if (item.is_wishlist) {
                             $('#add_to_wishlist').prop('checked', true);
@@ -727,6 +730,7 @@
         function add_cart() {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var variant = product_id;
+            var sku_id = product_variant_sku_id;
             var qty = $("#quant").val();
             $.ajax({
                 type: "POST",
@@ -736,6 +740,7 @@
                     from : 'product-detail',
                     qty: qty,
                     variant : variant,
+                    sku_id : sku_id,
                 },
                 dataType: "json",
                 beforeSend: function() {
@@ -770,7 +775,7 @@
             })
             .always(function() {
                 refresh_data_count_cart();
-                $('#btn_add_cart').html('PRE ORDER');
+                $('#btn_add_cart').html('Keranjang');
                 $('#btn_add_cart').removeAttr('disabled');
             });
         }
