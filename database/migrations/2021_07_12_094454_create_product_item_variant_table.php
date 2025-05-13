@@ -16,7 +16,7 @@ class CreateProductItemVariantTable extends Migration
         Schema::create('product_item_variant', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_item_id')->index('FK_product_item');
-            $table->string('sku_id', 100)->nullable()->comment('format("LK-YYYYMMDD-ID[substr(time(), 3)]"), sample: LK-20210804-1781');
+            $table->string('sku_id', 100)->nullable()->comment('format("EK-YYYYMMDD-ID[substr(time(), 3)]"), sample: EK-20210804-1781');
             $table->string('name')->default('none');
             $table->integer('weight')->unsigned()->comment('(in grams)');
             $table->text('details')->nullable();

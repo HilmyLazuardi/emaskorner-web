@@ -319,7 +319,7 @@ class ProductVariantController extends Controller
                             $product_item_variant->slug = Helper::check_unique('product_item_variant', $slug, 'slug');
 
                             // generate SKU for product_item_variant
-                            $sku = 'LK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
+                            $sku = 'EK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
                             $product_item_variant->sku_id = Helper::check_unique('product_item_variant', $sku, 'sku_id');
 
                             // processing variant image
@@ -414,7 +414,7 @@ class ProductVariantController extends Controller
                     $product_item_variant->slug = Helper::check_unique('product_item_variant', $slug, 'slug');
 
                     // generate SKU for product_item_variant
-                    $sku = 'LK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
+                    $sku = 'EK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
                     $product_item_variant->sku_id = Helper::check_unique('product_item_variant', $sku, 'sku_id');
 
                     // processing variant image
@@ -861,7 +861,7 @@ class ProductVariantController extends Controller
                                 $product_item_variant->product_item_id = $product_item->id;
 
                                 // generate SKU for product_item_variant (only for new variant)
-                                $sku = 'LK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
+                                $sku = 'EK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
                                 $product_item_variant->sku_id = Helper::check_unique('product_item_variant', $sku, 'sku_id');
                             }
 
@@ -1022,7 +1022,7 @@ class ProductVariantController extends Controller
                         $product_item_variant->product_item_id = $product_item->id;
 
                         // generate SKU for product_item_variant (only for new variant)
-                        $sku = 'LK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
+                        $sku = 'EK-' . date('Ymd') . '-' . $product_item->id . ((int) substr(time(), 0, 3) + $key_mixed);
                         $product_item_variant->sku_id = Helper::check_unique('product_item_variant', $sku, 'sku_id');
                     }
 

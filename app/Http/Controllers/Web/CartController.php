@@ -45,8 +45,8 @@ class CartController extends Controller
                 'product_item.global_stock',
                 'product_item.qty',
                 'product_item.price',
-                'product_item.campaign_start',
-                'product_item.campaign_end',
+                // 'product_item.campaign_start',
+                // 'product_item.campaign_end',
                 'product_item_variant.id as variant_id',
                 'product_item_variant.name as variant_name',
                 'product_item_variant.variant_image',
@@ -158,7 +158,7 @@ class CartController extends Controller
             'product_item.image',
             'product_item.global_stock',
             'product_item.qty',
-            'product_item.campaign_start',
+            // 'product_item.campaign_start',
             'product_item.campaign_end',
 
             'product_item_variant.id as variant_id',
@@ -183,8 +183,8 @@ class CartController extends Controller
 
             ->where('product_item.published_status', 1)
             ->where('product_item.approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
-            ->where('product_item.campaign_end', '>=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_end', '>=', $now)
             ->whereNull('product_item.deleted_at')
 
             ->where(function($query) {
@@ -206,8 +206,8 @@ class CartController extends Controller
             'product_item.image',
             'product_item.global_stock',
             'product_item.qty',
-            'product_item.campaign_start',
-            'product_item.campaign_end',
+            // 'product_item.campaign_start',
+            // 'product_item.campaign_end',
 
             'product_item_variant.id as variant_id',
             'product_item_variant.name as variant_name',
@@ -229,8 +229,8 @@ class CartController extends Controller
             ->where('product_item.published_status', 1)
             ->where('product_item.approval_status', 1)
             
-            ->where('product_item.campaign_start', '<=', $now)
-            ->where('product_item.campaign_end', '>=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_end', '>=', $now)
 
             ->where(function($query) {
                 $query->where('product_item.global_stock', '1')
@@ -269,10 +269,13 @@ class CartController extends Controller
 
         // CONVERT TO ID
         $real_item_id = Helper::validate_token($request->variant);
+            
+        $sku_id = $request->sku_id;
 
         // CHECK ITEM PRODUCT VARIANT
         $item = product_item_variant::select(
                 'product_item_variant.id as variant_id',
+                'product_item_variant.sku_id',
                 'product_item.id as item_id',
                 'product_item.qty',
                 'product_item.global_stock',
@@ -280,6 +283,7 @@ class CartController extends Controller
             )
             ->leftJoin('product_item', 'product_item_variant.product_item_id', 'product_item.id')
             ->where('product_item_variant.id', (int) $real_item_id)
+            ->where('product_item_variant.sku_id', $sku_id)
             ->first();
 
         if (!$item) {
@@ -308,6 +312,7 @@ class CartController extends Controller
             $last = shopping_cart::select('qty')
                 ->where('buyer_id', (int) $buyer->id)
                 ->where('product_item_variant_id', (int) $real_item_id)
+                ->where('sku_id', $sku_id)
                 ->orderBy('created_at', 'desc')
                 ->first();
 
@@ -336,12 +341,29 @@ class CartController extends Controller
             }
             
             // PROCESS ADD DATA TO SHOPPING BY BUYER ID
-            shopping_cart::updateOrCreate([
-                'buyer_id' => (int) $buyer->id,
-                'product_item_variant_id' => (int) $real_item_id,
-            ], [
-                'qty' => (int) $qty
-            ]);
+            // shopping_cart::updateOrCreate([
+            //     'buyer_id' => (int) $buyer->id,
+            //     'product_item_variant_id' => (int) $real_item_id,
+            //     'sku_id' => $sku_id,
+            // ], [
+            //     'qty' => (int) $qty
+            // ]);
+            if ($last) { // update
+                $cart = shopping_cart::where('buyer_id', $buyer->id)
+                    ->where('product_item_variant_id', $real_item_id)
+                    ->where('sku_id', $sku_id)
+                    ->update([
+                        'qty' => (int) $qty
+                    ]);
+            } else { // insert
+                $cart = new shopping_cart();
+                $cart->buyer_id = $buyer->id;
+                $cart->product_item_variant_id = $real_item_id;
+                $cart->sku_id = $sku_id;
+                $cart->qty = (int) $qty;
+                $cart->save();
+            }
+
 
             DB::commit();
         } catch (\Exception $ex) {
@@ -435,6 +457,8 @@ class CartController extends Controller
             if (!$last) {
                 $qty = $last->qty + $qty;
             }
+            
+            $sku_id = $item->sku_id;
 
             // NOTES
             $notes = Helper::validate_input_text($request->notes);
@@ -442,6 +466,7 @@ class CartController extends Controller
             // PROCESS ADD DATA TO SHOPPING BY BUYER ID
             shopping_cart::where('buyer_id', (int) $buyer->id)
                 ->where('product_item_variant_id', (int) $real_item_id)
+                ->where('sku_id', $sku_id)
                 ->update([
                     'qty'   => (int) $qty,
                     'note'  => $notes
@@ -551,8 +576,8 @@ class CartController extends Controller
                 'product_item.global_stock',
                 'product_item.qty',
                 'product_item.price',
-                'product_item.campaign_start',
-                'product_item.campaign_end',
+                // 'product_item.campaign_start',
+                // 'product_item.campaign_end',
                 'product_item_variant.id as variant_id',
                 'product_item_variant.name as variant_name',
                 'product_item_variant.variant_image',
@@ -599,9 +624,9 @@ class CartController extends Controller
                         if ($item->qty < 1) {
                             $item->flag_soldout         = true;
                             $item->flag_campaign_end    = false;
-                        } else if ($item->qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
-                            $item->flag_soldout         = false;
-                            $item->flag_campaign_end    = true;
+                        // } else if ($item->qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
+                        //     $item->flag_soldout         = false;
+                        //     $item->flag_campaign_end    = true;
                         } else {
                             $item->flag_soldout         = false;
                             $item->flag_campaign_end    = false;
@@ -613,9 +638,9 @@ class CartController extends Controller
                         if ($item->variant_qty < 1) {
                             $item->flag_soldout         = true;
                             $item->flag_campaign_end    = false;
-                        } else if ($item->variant_qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
-                            $item->flag_soldout         = false;
-                            $item->flag_campaign_end    = true;
+                        // } else if ($item->variant_qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
+                        //     $item->flag_soldout         = false;
+                        //     $item->flag_campaign_end    = true;
                         } else {
                             $item->flag_soldout         = false;
                             $item->flag_campaign_end    = false;

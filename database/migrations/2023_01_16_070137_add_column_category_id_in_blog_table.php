@@ -26,7 +26,7 @@ class AddColumnCategoryIdInBlogTable extends Migration
     public function down()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            //
+            $table->dropColumn('category_id');
         });
     }
 }

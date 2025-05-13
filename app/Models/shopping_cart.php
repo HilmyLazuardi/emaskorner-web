@@ -20,6 +20,6 @@ class shopping_cart extends Model
      * @var array
      */
     protected $fillable = [
-        'buyer_id', 'product_item_variant_id', 'qty'
+        'buyer_id', 'product_item_variant_id', 'sku_id', 'qty'
     ];
 }

@@ -83,9 +83,9 @@ class ProductController extends Controller
                         ->where('order.progress_status', '!=', 4);
                 })
                 ->where('product_item.published_status', 1)
-                ->where('product_item.approval_status', 1)
-                ->where('product_item.campaign_start', '<=', $now)
-                ->where('product_item.campaign_end', '>=', $two_month_ago);
+                ->where('product_item.approval_status', 1);
+                // ->where('product_item.campaign_start', '<=', $now)
+                // ->where('product_item.campaign_end', '>=', $two_month_ago);
 
             if (!empty($keyword)) {
                 $keyword_arr = explode(' ', $keyword);
@@ -326,9 +326,9 @@ class ProductController extends Controller
                     ->whereNull('product_item_variant.deleted_at');
             })
             ->where('product_item.published_status', 1)
-            ->where('product_item.approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
-            ->where('product_item.campaign_end', '>=', $two_month_ago);
+            ->where('product_item.approval_status', 1);
+            // ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_end', '>=', $two_month_ago);
 
         if ($request->slug) {
             $data->leftJoin('product_category', 'product_item.category_id', 'product_category.id')
@@ -738,7 +738,7 @@ class ProductController extends Controller
             })
             ->where('product_item.published_status', 1)
             ->where('product_item.approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
             ->where('product_item.category_id', $data_category->id)
             ->orderBy('default_variant.created_at', 'desc')
             ->groupBy(
@@ -760,7 +760,7 @@ class ProductController extends Controller
 
         $count_product = product_item::where('published_status', 1)
             ->where('approval_status', 1)
-            ->where('product_item.campaign_start', '<=', $now)
+            // ->where('product_item.campaign_start', '<=', $now)
             ->where('category_id', $data_category->id)
             ->count();
 
@@ -986,8 +986,8 @@ class ProductController extends Controller
                 'product_item.variant_1_list',
                 'product_item.variant_2',
                 'product_item.variant_2_list',
-                'product_item.campaign_start',
-                'product_item.campaign_end',
+                // 'product_item.campaign_start',
+                // 'product_item.campaign_end',
                 'product_item.featured',
                 'product_item.approval_status',
                 'product_item.published_status',
@@ -1001,6 +1001,7 @@ class ProductController extends Controller
                 'product_item_variant.name as variant_name',
                 'product_item_variant.variant_1 as variant_1_name',
                 'product_item_variant.variant_2 as variant_2_name',
+                'product_item_variant.sku_id as variant_sku_id',
                 DB::raw('SUM(order_details.qty) as order_qty'),
                 'product_item_variant.qty as variant_qty',
                 'product_item_variant.qty_booked as variant_qty_booked',
@@ -1020,7 +1021,8 @@ class ProductController extends Controller
         $preview = true;
         if (!$request->preview) {
             $preview    = false;
-            $data       = $data->where('product_item.approval_status', 1)->where('product_item.published_status', 1)->where('product_item.campaign_start', '<=', $now);
+            // $data       = $data->where('product_item.approval_status', 1)->where('product_item.published_status', 1)->where('product_item.campaign_start', '<=', $now);
+            $data       = $data->where('product_item.approval_status', 1)->where('product_item.published_status', 1);
         }
 
         $data = $data->where('product_item_variant.slug', $slug)
@@ -1043,8 +1045,8 @@ class ProductController extends Controller
                 'product_item.variant_1_list',
                 'product_item.variant_2',
                 'product_item.variant_2_list',
-                'product_item.campaign_start',
-                'product_item.campaign_end',
+                // 'product_item.campaign_start',
+                // 'product_item.campaign_end',
                 'product_item.featured',
                 'product_item.approval_status',
                 'product_item.published_status',
@@ -1058,13 +1060,16 @@ class ProductController extends Controller
                 'product_item_variant.name',
                 'product_item_variant.variant_1',
                 'product_item_variant.variant_2',
+                'product_item_variant.sku_id',
                 'product_item_variant.qty',
                 'product_item_variant.qty_booked',
                 'product_item_variant.qty_sold'
             )
             ->first();
 
-        if (empty($data)) { return redirect()->route('web.home'); }
+        if (empty($data)) { 
+            return redirect()->route('web.home');
+        }
 
         if ($request->preview) {
             // IF PREVIEW, CHECK PRODUCT ITEM DETAILS
@@ -1226,7 +1231,7 @@ class ProductController extends Controller
         $variant_slug = Helper::validate_input_text($request->variant_slug);
         $variant_slug = strtolower($variant_slug);
 
-        $data = product_item::select(
+        $query = product_item::select(
             'product_item.name',
             'product_item.global_stock',
             'product_item.campaign_end',
@@ -1238,6 +1243,7 @@ class ProductController extends Controller
             'product_item_variant.name as variant_name',
             'product_item_variant.price',
             'product_item_variant.slug',
+            'product_item_variant.sku_id as variant_sku_id',
             'product_item_variant.status',
             DB::raw('SUM(product_item_variant.qty) as variant_qty'),
             DB::raw('SUM(product_item_variant.qty_booked) as variant_qty_booked'),
@@ -1247,7 +1253,7 @@ class ProductController extends Controller
         ->where('product_item_variant.slug', $variant_slug)
         ->whereNull('product_item_variant.deleted_at');
 
-        $data = $data->groupBy(
+        $data = $query->groupBy(
                 'product_item.name',
                 'product_item.global_stock',
                 'product_item.campaign_end',
@@ -1259,6 +1265,7 @@ class ProductController extends Controller
                 'product_item_variant.name',
                 'product_item_variant.price',
                 'product_item_variant.slug',
+                'product_item_variant.sku_id',
                 'product_item_variant.status'
             )
             ->first();
