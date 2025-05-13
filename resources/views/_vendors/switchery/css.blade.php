@@ -1,0 +1,1 @@
+<link href="{{ asset('vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
