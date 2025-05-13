@@ -1,0 +1,36 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Maximum execution time of each script, in seconds http://php.net/max-execution-time (default 30)
+# php_value max_execution_time 30
+
+# Maximum number of files that can be uploaded via a single request (default 20)
+# php_value max_file_uploads 20
+
+# How many GET/POST/COOKIE input variables may be accepted (default 1000)
+php_value max_input_vars 3000
+
+# Maximum size of POST data that PHP will accept  http://php.net/post-max-size (default 8M)
+php_value post_max_size 15M
+
+# Maximum allowed size for uploaded files http://php.net/upload-max-filesize (default 2M)
+# php_value upload_max_filesize 2M

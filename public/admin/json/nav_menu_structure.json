@@ -1,0 +1,275 @@
+{
+    "top": [
+      {
+        "id": 2,
+        "name": "Home",
+        "link_type": "internal",
+        "link_external": "",
+        "link_internal": "/",
+        "link_target": "same window",
+        "level": 1,
+        "parent_id": "",
+        "position": "top"
+      },
+      {
+        "id": 6,
+        "name": "Services",
+        "link_type": "none",
+        "link_external": "",
+        "link_internal": "",
+        "link_target": "same window",
+        "level": 1,
+        "parent_id": "",
+        "position": "top",
+        "level_2": [
+          {
+            "id": 7,
+            "name": "Website",
+            "link_type": "none",
+            "link_external": "",
+            "link_internal": "",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 6,
+            "position": "top",
+            "level_3": [
+              {
+                "id": 15,
+                "name": "Company Profile",
+                "link_type": "internal",
+                "link_external": "",
+                "link_internal": "/web-company-profile",
+                "link_target": "same window",
+                "level": 3,
+                "parent_id": 7,
+                "position": "top"
+              },
+              {
+                "id": 16,
+                "name": "Online Shop",
+                "link_type": "internal",
+                "link_external": "",
+                "link_internal": "/web-online-shop",
+                "link_target": "same window",
+                "level": 3,
+                "parent_id": 7,
+                "position": "top"
+              },
+              {
+                "id": 17,
+                "name": "Custom Based on Request",
+                "link_type": "internal",
+                "link_external": "",
+                "link_internal": "/web-custom",
+                "link_target": "same window",
+                "level": 3,
+                "parent_id": 7,
+                "position": "top"
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "name": "Mobile Application",
+            "link_type": "none",
+            "link_external": "",
+            "link_internal": "",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 6,
+            "position": "top",
+            "level_3": [
+              {
+                "id": 9,
+                "name": "Android",
+                "link_type": "internal",
+                "link_external": "",
+                "link_internal": "/android-development",
+                "link_target": "same window",
+                "level": 3,
+                "parent_id": 8,
+                "position": "top",
+                "level_4": [
+                  {
+                    "id": 12,
+                    "name": "Dynamic",
+                    "link_type": "internal",
+                    "link_external": "",
+                    "link_internal": "/android-development-dynamic",
+                    "link_target": "same window",
+                    "level": 4,
+                    "parent_id": 9,
+                    "position": "top",
+                    "level_5": [
+                      {
+                        "id": 13,
+                        "name": "All-In",
+                        "link_type": "internal",
+                        "link_external": "",
+                        "link_internal": "/android-development-dynamic-all-in",
+                        "link_target": "same window",
+                        "level": 5,
+                        "parent_id": 12,
+                        "position": "top"
+                      },
+                      {
+                        "id": 14,
+                        "name": "App Only",
+                        "link_type": "internal",
+                        "link_external": "",
+                        "link_internal": "/android-development-dynamic-app-only",
+                        "link_target": "same window",
+                        "level": 5,
+                        "parent_id": 12,
+                        "position": "top"
+                      }
+                    ]
+                  },
+                  {
+                    "id": 11,
+                    "name": "Static",
+                    "link_type": "internal",
+                    "link_external": "",
+                    "link_internal": "/android-development-static",
+                    "link_target": "same window",
+                    "level": 4,
+                    "parent_id": 9,
+                    "position": "top"
+                  }
+                ]
+              },
+              {
+                "id": 10,
+                "name": "iOS Apple",
+                "link_type": "internal",
+                "link_external": "",
+                "link_internal": "/ios-development",
+                "link_target": "same window",
+                "level": 3,
+                "parent_id": 8,
+                "position": "top"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "About Us",
+        "link_type": "none",
+        "link_external": "",
+        "link_internal": "about",
+        "link_target": "same window",
+        "level": 1,
+        "parent_id": "",
+        "position": "top",
+        "level_2": [
+          {
+            "id": 4,
+            "name": "Our Story",
+            "link_type": "internal",
+            "link_external": "",
+            "link_internal": "/our-story",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 1,
+            "position": "top"
+          },
+          {
+            "id": 5,
+            "name": "Our Vision & Mission",
+            "link_type": "internal",
+            "link_external": "",
+            "link_internal": "/our-vision-mission",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 1,
+            "position": "top"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Contact Us",
+        "link_type": "external",
+        "link_external": "https://wa.me/628989158210",
+        "link_internal": "",
+        "link_target": "new window",
+        "level": 1,
+        "parent_id": "",
+        "position": "top"
+      }
+    ],
+    "bottom": [
+      {
+        "id": 18,
+        "name": "Siorensys",
+        "link_type": "internal",
+        "link_external": "",
+        "link_internal": "/",
+        "link_target": "same window",
+        "level": 1,
+        "parent_id": "",
+        "position": "bottom",
+        "level_2": [
+          {
+            "id": 20,
+            "name": "About",
+            "link_type": "internal",
+            "link_external": "",
+            "link_internal": "/about",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 18,
+            "position": "bottom"
+          },
+          {
+            "id": 21,
+            "name": "FAQ",
+            "link_type": "internal",
+            "link_external": "",
+            "link_internal": "/faq",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 18,
+            "position": "bottom"
+          },
+          {
+            "id": 22,
+            "name": "Contact Us",
+            "link_type": "internal",
+            "link_external": "",
+            "link_internal": "/contact-us",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 18,
+            "position": "bottom"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "name": "Pages",
+        "link_type": "none",
+        "link_external": "",
+        "link_internal": "",
+        "link_target": "same window",
+        "level": 1,
+        "parent_id": "",
+        "position": "bottom",
+        "level_2": [
+          {
+            "id": 23,
+            "name": "Cheatsheet",
+            "link_type": "internal",
+            "link_external": "",
+            "link_internal": "/cheatsheet",
+            "link_target": "same window",
+            "level": 2,
+            "parent_id": 19,
+            "position": "bottom"
+          }
+        ]
+      }
+    ]
+  }

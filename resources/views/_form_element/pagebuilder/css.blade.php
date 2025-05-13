@@ -1,0 +1,1 @@
+<link href="{{ asset('/admin/vendors/jquery-ui/jquery-ui-git.css') }}" rel="stylesheet">

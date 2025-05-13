@@ -1,0 +1,53 @@
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 10px;
+
+  label.cabinet {
+    display: block;
+    cursor: pointer;
+    position: relative;
+
+    .hiddenDiv {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      opacity: 0;
+      z-index: 9999;
+      height: 100%;
+      width: 100%;
+      display: none;
+
+      &:hover {
+        display: block;
+        opacity: 1;
+      }
+    }
+
+    input.file {
+      position: relative;
+      height: 100%;
+      width: auto;
+      opacity: 0;
+      -moz-opacity: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+      margin-top: -30px;
+    }
+  }
+
+  .img-thumbnail {
+    width: 100%;
+    border: 3px dotted black;
+  }
+}
+
+#upload-demo {
+  width: 400px;
+  height: 400px;
+  padding-bottom: 25px;
+}

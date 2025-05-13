@@ -1,0 +1,27 @@
+.left_col, .nav_title, body, .sidebar-footer {
+    background: black !important;
+  }
+  .nav.side-menu>li.active>a{
+    background: linear-gradient(#334556,#2C4257),#143c6d !important;
+  }
+  .sidebar-footer a {
+    background: #E92030 !important;
+    color: white !important;
+  }
+  .sidebar-footer a:hover {
+    background: #46a2db !important;
+    color: white !important;
+  }
+  .nav_menu {
+    background: #E92030 !important;
+  }
+  .nav.navbar-nav>li>a{
+    color :white !important;
+  }
+  .top_nav .nav .open>a,.top_nav .nav .open>a:focus,.top_nav .nav .open>a:hover,.top_nav .nav>li>a:focus,.top_nav .nav>li>a:hover{
+    background:white !important;
+    color: #E92030 !important;
+  }
+  #menu_toggle {
+    color: white !important;
+  }
