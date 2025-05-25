@@ -444,15 +444,15 @@ if (!function_exists('set_input_form')) {
                     $height = 720;
                     if (ini_get('allow_url_fopen')) {
                         // $imgPath = public_path('images/logo-square.png');
-                        // $imgPath2 = $img_src;
-                        // dd(file_exists($imgPath), $imgPath, $imgPath2);
-                        // dd(file_exists($img_src));
+                        // // $imgPath2 = $img_src;
+                        // // dd(file_exists($imgPath), $imgPath, $imgPath2);
+                        // // dd(file_exists($img_src));
                         // if (file_exists($imgPath)) {
-                            // dd('ada');/
-                            // $size = getimagesize($imgPath);
+                        //     // dd('ada');/
+                        //     $size = getimagesize($imgPath);
                         // } else {
-                            // dd('tidak');
-                            // echo "File tidak ditemukan!";
+                        //     // dd('tidak');
+                        //     echo "File tidak ditemukan!";
                         // }
                         // dd($size);
 

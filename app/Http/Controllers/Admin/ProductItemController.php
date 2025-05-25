@@ -1416,10 +1416,10 @@ class ProductItemController extends Controller
                 $ordinal                        = 1;
 
                 if ($last) {
-                    $data_featured = product_item::where('id', $last->product_id)->update(['featured' => 0]);
+                    // $data_featured = product_item::where('id', $last->product_id)->update(['featured' => 0]);
                     // DELETE FROM TABLE PRODUCT FEATURED BEFORE INSERT NEW
-                    $delete_data = product_featured::where('product_id', $last->product_id)->delete();
-                    // $ordinal = $last->ordinal + 1; 
+                    // $delete_data = product_featured::where('product_id', $last->product_id)->delete();
+                    $ordinal = $last->ordinal + 1; 
                 }
 
                 // INSERT TO TABLE PRODUCT FEATURED

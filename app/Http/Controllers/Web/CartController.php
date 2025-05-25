@@ -81,9 +81,9 @@ class CartController extends Controller
                     if ($item->qty < 1) {
                         $item->flag_soldout         = true;
                         $item->flag_campaign_end    = false;
-                    } else if ($item->qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
-                        $item->flag_soldout         = false;
-                        $item->flag_campaign_end    = true;
+                    // } else if ($item->qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
+                    //     $item->flag_soldout         = false;
+                    //     $item->flag_campaign_end    = true;
                     } else {
                         $item->flag_soldout         = false;
                         $item->flag_campaign_end    = false;
@@ -95,9 +95,9 @@ class CartController extends Controller
                     if ($item->variant_qty < 1) {
                         $item->flag_soldout         = true;
                         $item->flag_campaign_end    = false;
-                    } else if ($item->variant_qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
-                        $item->flag_soldout         = false;
-                        $item->flag_campaign_end    = true;
+                    // } else if ($item->variant_qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
+                    //     $item->flag_soldout         = false;
+                    //     $item->flag_campaign_end    = true;
                     } else {
                         $item->flag_soldout         = false;
                         $item->flag_campaign_end    = false;
