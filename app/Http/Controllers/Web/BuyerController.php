@@ -738,8 +738,8 @@ class BuyerController extends Controller
             'product_item.image',
             'product_item.global_stock',
             'product_item.qty',
-            'product_item.campaign_start',
-            'product_item.campaign_end',
+            // 'product_item.campaign_start',
+            // 'product_item.campaign_end',
 
             'product_item_variant.id as variant_id',
             'product_item_variant.name as variant_name',
@@ -811,9 +811,9 @@ class BuyerController extends Controller
                     if ($item->qty < 1) {
                         $item->flag_soldout         = true;
                         $item->flag_campaign_end    = false;
-                    } else if ($item->qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
-                        $item->flag_soldout         = false;
-                        $item->flag_campaign_end    = true;
+                    // } else if ($item->qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
+                    //     $item->flag_soldout         = false;
+                    //     $item->flag_campaign_end    = true;
                     } else {
                         $item->flag_soldout         = false;
                         $item->flag_campaign_end    = false;
@@ -829,9 +829,9 @@ class BuyerController extends Controller
                     if ($variant_qty < 1) {
                         $item->flag_soldout         = true;
                         $item->flag_campaign_end    = false;
-                    } else if ($variant_qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
-                        $item->flag_soldout         = false;
-                        $item->flag_campaign_end    = true;
+                    // } else if ($variant_qty > 0 && (date('Y-m-d H:i:s') > $item->campaign_end)) {
+                    //     $item->flag_soldout         = false;
+                    //     $item->flag_campaign_end    = true;
                     } else {
                         $item->flag_soldout         = false;
                         $item->flag_campaign_end    = false;

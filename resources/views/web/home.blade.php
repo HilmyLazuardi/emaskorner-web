@@ -145,16 +145,16 @@
                         } else { // Jika bukan global stock, ambil total stock seluruh variant
                             // 0 sebagai default value, jadi tidak menghitung data null
                             $variant_qty = 0;
-                            if ($item->variant_qty > 0) {
-                                $variant_qty = $item->variant_qty;
+                            if ($product->variant_qty > 0) {
+                                $variant_qty = $product->variant_qty;
                             }
                             $variant_qty_booked = 0;
-                            if ($item->variant_qty_booked > 0) {
-                                $variant_qty_booked = $item->variant_qty_booked;
+                            if ($product->variant_qty_booked > 0) {
+                                $variant_qty_booked = $product->variant_qty_booked;
                             }
                             $variant_qty_sold = 0;
-                            if ($item->variant_qty_sold > 0) {
-                                $variant_qty_sold = $item->variant_qty_sold;
+                            if ($product->variant_qty_sold > 0) {
+                                $variant_qty_sold = $product->variant_qty_sold;
                             }
                             
                             // Hitung persentase
@@ -217,7 +217,7 @@
                                 $persentase = 0;
 
                                 // Jika global stock, ambil dari product.qty
-                                if ($item->global_stock) {
+                                if ($products->global_stock) {
                                     $persentase = ($products->order_qty / $products->qty) * 100;
                                 } else { // Jika bukan global stock, ambil total stock seluruh variant
                                     $persentase = ($products->order_qty / $products->variant_qty) * 100;

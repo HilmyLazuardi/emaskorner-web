@@ -203,12 +203,14 @@ class BannerController extends Controller
                 }
                 $image_file = $request->file('image');
                 $format_image_name = Helper::unique_string();
+                // $format_image_name = Helper::generate_slug($request->name) . '-' . time();
                 $allowed_extensions = ['jpeg', 'jpg', 'png', 'gif'];
                 $generate_thumbnail = true;
                 $thumbnail_width = 200;
                 $thumbnail_height = 200;
                 $thumbnail_quality_percentage = 80;
                 $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                // $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name);
                 if ($image['status'] != 'true') {
                     # FAILED TO UPLOAD IMAGE
                     return back()
@@ -217,7 +219,7 @@ class BannerController extends Controller
                 }
 
                 $data->image = $dir_path . $image['data'];
-                $data->image_thumb = $dir_path . $image['thumbnail'];
+                $data->image_thumb = $dir_path . $image['data'];
             }
 
             if ($request->file('image_mobile')) {
@@ -234,7 +236,8 @@ class BannerController extends Controller
                 $thumbnail_width = 200;
                 $thumbnail_height = 200;
                 $thumbnail_quality_percentage = 80;
-                $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                // $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions);
                 if ($image['status'] != 'true') {
                     # FAILED TO UPLOAD IMAGE
                     return back()
@@ -243,7 +246,7 @@ class BannerController extends Controller
                 }
 
                 $data->image_mobile = $dir_path . $image['data'];
-                $data->image_mobile_thumb = $dir_path . $image['thumbnail'];
+                $data->image_mobile_thumb = $dir_path . $image['data'];
             }
 
             // HELPER VALIDATION FOR PREVENT SQL INJECTION & XSS ATTACK
@@ -477,7 +480,8 @@ class BannerController extends Controller
                 $thumbnail_width = 200;
                 $thumbnail_height = 200;
                 $thumbnail_quality_percentage = 80;
-                $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                // $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions);
                 if ($image['status'] != 'true') {
                     # FAILED TO UPLOAD IMAGE
                     return back()
@@ -503,7 +507,8 @@ class BannerController extends Controller
                 $thumbnail_width = 200;
                 $thumbnail_height = 200;
                 $thumbnail_quality_percentage = 80;
-                $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                // $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions, $generate_thumbnail, $thumbnail_width, $thumbnail_height, $thumbnail_quality_percentage);
+                $image = Helper::upload_image($dir_path, $image_file, true, $format_image_name, $allowed_extensions);
                 if ($image['status'] != 'true') {
                     # FAILED TO UPLOAD IMAGE
                     return back()

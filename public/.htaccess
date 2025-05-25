@@ -30,7 +30,7 @@
 php_value max_input_vars 3000
 
 # Maximum size of POST data that PHP will accept  http://php.net/post-max-size (default 8M)
-php_value post_max_size 15M
+php_value post_max_size 50M
 
 # Maximum allowed size for uploaded files http://php.net/upload-max-filesize (default 2M)
 # php_value upload_max_filesize 2M
